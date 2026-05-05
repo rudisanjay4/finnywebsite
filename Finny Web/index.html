@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="id">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2005QH211J"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-2005QH211J');
+</script>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Finny — Kelola Keuangan, Secepat Kirim Chat</title>
+<meta name="description" content="Catat keuangan lewat chat di Telegram. Foto struk, rekam suara, laporan otomatis. Gratis, tanpa install." />
+<meta property="og:title" content="Finny — Kelola Keuangan, Secepat Kirim Chat" />
+<meta property="og:description" content="Catat keuangan lewat chat di Telegram. Foto struk, rekam suara, laporan otomatis." />
+<meta property="og:type" content="website" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" />
+
+<style>
+  :root{
+    /* ── Core palette (from finny.id reference) ── */
+    --background: #ffffff;
+    --foreground: #0d2b1e;
+    --card: #ffffff;
+
+    --primary: #22aa7c;
+    --primary-dark: #008f67;
+    --primary-light: #53bb9d;
+    --primary-foreground: #ffffff;
+
+    --accent: #a2e5ca;
+    --accent-light: #e7fbf2;
+    --accent-foreground: #0d3d28;
+
+    --muted-foreground: #4a6b5c;
+    --border: #cce8da;
+    --surface: #f3faf6;
+    --surface-tint: #e7fbf2;
+
+    /* ── Gradients — solid/subtle, no mesh ── */
+    --gradient-hero: linear-gradient(160deg, #e7fbf2 0%, #f6fdf9 60%, #ffffff 100%);
+    --gradient-primary: linear-gradient(135deg, #005c45 0%, #008f67 40%, #22aa7c 70%, #53bb9d 100%);
+    --gradient-soft: linear-gradient(180deg, #f3faf6 0%, #ffffff 100%);
+    --gradient-card: linear-gradient(145deg, #ffffff 0%, #f6fdf9 100%);
+    --gradient-mesh: none;
+
+    /* ── Shadows ── */
+    --shadow-sm: 0 1px 3px rgba(34,170,124,0.08), 0 4px 12px rgba(34,170,124,0.06);
+    --shadow-md: 0 8px 24px rgba(34,170,124,0.10), 0 2px 6px rgba(34,170,124,0.05);
+    --shadow-lg: 0 24px 60px rgba(0,143,103,0.15);
+    --shadow-glow: 0 8px 32px rgba(34,170,124,0.30);
+
+    --font-display: 'Fraunces', Georgia, serif;
+    --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0;border:0 solid var(--border);}
+  html{scroll-behavior:smooth;}
+  body{font-family:var(--font-sans);background:var(--background);color:var(--foreground);-webkit-font-smoothing:antialiased;line-height:1.5;}
+  a{text-decoration:none;color:inherit;}
+  img{display:block;max-width:100%;height:auto;}
+  .container{max-width:72rem;margin:0 auto;padding:0 1.5rem;}
+  @media(min-width:1024px){.container{padding:0 2.5rem;}}
+
+  /* Navbar */
+  .nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(16px);background:rgba(255,255,255,0.92);border-bottom:1px solid var(--border);}
+  .nav-inner{height:64px;display:flex;align-items:center;justify-content:space-between;}
+  .brand{display:flex;align-items:center;gap:.625rem;}
+  .brand-logo{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:var(--font-sans);font-weight:700;font-size:18px;color:#fff;background:var(--gradient-primary);box-shadow:none;}
+  .brand-name{font-weight:700;font-size:18px;letter-spacing:-.02em;color:var(--foreground);}
+  .nav-links{display:none;gap:2rem;font-size:14px;font-weight:500;color:var(--muted-foreground);}
+  .nav-links a:hover{color:var(--primary);}
+  @media(min-width:768px){.nav-links{display:flex;}}
+  .btn-primary{display:inline-flex;align-items:center;gap:.5rem;padding:10px 22px;border-radius:9999px;font-size:14px;font-weight:600;color:#fff;background:var(--gradient-primary);box-shadow:none;transition:all .2s;}
+  .btn-primary:hover{filter:brightness(1.08);transform:translateY(-1px);box-shadow:var(--shadow-glow);}
+
+  /* Hero */
+  .hero{position:relative;overflow:hidden;}
+  .hero-bg{position:absolute;inset:0;z-index:-1;background:var(--gradient-hero);}
+  .hero-mesh{display:none;}
+  .hero-inner{padding-top:4.5rem;padding-bottom:0;}
+  .hero-grid{display:grid;grid-template-columns:1fr;gap:2.5rem;align-items:center;}
+  @media(min-width:1024px){.hero-grid{grid-template-columns:1fr 1fr;gap:2rem;min-height:580px;}}
+  .eyebrow{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--primary-dark);background:var(--accent-light);border:1px solid var(--accent);padding:5px 14px;border-radius:9999px;}
+  .hero-copy{text-align:center;}
+  @media(min-width:1024px){.hero-copy{text-align:left;}}
+  h1.hero-title{font-family:var(--font-display);font-weight:700;line-height:1.0;letter-spacing:-.025em;margin-top:1.25rem;font-size:clamp(42px,5vw,68px);}
+  .grad-text{color:var(--primary-dark);font-style:italic;font-family:var(--font-display);}
+  .hero-sub{margin-top:1.25rem;max-width:28rem;font-size:1rem;color:var(--muted-foreground);line-height:1.75;}
+  @media(max-width:1023px){.hero-sub{margin-left:auto;margin-right:auto;}}
+  .hero-ctas{margin-top:2rem;display:flex;flex-wrap:wrap;gap:.75rem;justify-content:center;}
+  @media(min-width:1024px){.hero-ctas{justify-content:flex-start;}}
+  .btn-secondary{display:inline-flex;align-items:center;gap:.5rem;padding:14px 28px;border-radius:9999px;background:#fff;border:1.5px solid var(--border);font-size:14px;font-weight:600;color:var(--foreground);transition:all .2s;}
+  .btn-secondary:hover{background:var(--surface-tint);border-color:var(--primary);}
+  .btn-primary.lg{padding:14px 28px;}
+  .hero-img-wrap{position:relative;display:flex;justify-content:center;align-self:flex-end;}
+  @media(min-width:1024px){.hero-img-wrap{justify-content:flex-end;}}
+  .hero-img-inner{position:relative;width:100%;max-width:26rem;}
+  @media(min-width:1024px){.hero-img-inner{max-width:100%;}}
+  .hero-glow-outer{display:none;}
+  .hero-glow-inner{display:none;}
+  .hero-img{position:relative;width:100%;border-radius:20px 20px 0 0;object-fit:cover;box-shadow:var(--shadow-lg);}
+  @media(min-width:1024px){.hero-img{border-radius:20px 20px 0 0;max-height:560px;object-position:top;}}
+
+  /* Section base */
+  section.block{padding:6rem 1.5rem;}
+  @media(min-width:1024px){section.block{padding-left:2.5rem;padding-right:2.5rem;}}
+  .center{text-align:center;}
+  .max-2{max-width:42rem;margin:0 auto;}
+  h2.section-title{font-family:var(--font-display);font-weight:700;margin-top:1.25rem;line-height:1.05;letter-spacing:-.025em;font-size:clamp(30px,3.6vw,48px);}
+  .section-sub{margin-top:1rem;color:var(--muted-foreground);line-height:1.7;font-size:.95rem;}
+
+  /* Features */
+  .features-grid{display:grid;grid-template-columns:1fr;gap:1.25rem;margin-top:3.5rem;}
+  @media(min-width:768px){.features-grid{grid-template-columns:1fr 1fr;}}
+  @media(min-width:1024px){.features-grid{grid-template-columns:repeat(3,1fr);}}
+  .feature-card{position:relative;padding:1.75rem;border-radius:1rem;border:1px solid var(--border);background:var(--card);transition:all .25s;}
+  .feature-card:hover{border-color:var(--primary);transform:translateY(-4px);box-shadow:var(--shadow-md);}
+  .feature-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:1.25rem;background:var(--accent-light);transition:transform .25s;}
+  .feature-card:hover .feature-icon{transform:scale(1.1);}
+  .feature-title{font-weight:700;font-size:1rem;letter-spacing:-.01em;color:var(--foreground);}
+  .feature-desc{font-size:.875rem;color:var(--muted-foreground);margin-top:.5rem;line-height:1.7;}
+  .badges{position:absolute;top:1.25rem;right:1.25rem;display:flex;gap:.375rem;}
+  .badge{font-size:10px;font-weight:700;padding:2px 8px;border-radius:9999px;text-transform:uppercase;letter-spacing:.05em;}
+  .badge.lite{background:var(--accent-light);color:var(--primary-dark);border:1px solid var(--accent);}
+  .badge.pro{background:var(--primary);color:#fff;}
+
+  /* Pricing */
+  .pricing{position:relative;overflow:hidden;}
+  .pricing-bg{position:absolute;inset:0;z-index:-1;background:var(--surface);}
+  .pricing-mesh{display:none;}
+  .pricing-grid{display:grid;grid-template-columns:1fr;gap:1.5rem;margin-top:3.5rem;align-items:stretch;}
+  @media(min-width:768px){.pricing-grid{grid-template-columns:repeat(3,1fr);}}
+  .plan{position:relative;padding:2rem;border-radius:24px;display:flex;flex-direction:column;background:var(--card);border:1.5px solid var(--border);box-shadow:var(--shadow-sm);transition:all .25s;}
+  .plan:hover{transform:translateY(-4px);box-shadow:var(--shadow-md);border-color:var(--primary);}
+  .plan.featured{background:var(--gradient-primary);border-color:transparent;color:#fff;box-shadow:var(--shadow-lg);}
+  .plan.featured:hover{filter:brightness(1.06);}
+  @media(min-width:768px){.plan.featured{transform:scale(1.03);}.plan.featured:hover{transform:scale(1.03) translateY(-4px);}}
+  .plan-tag{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--foreground);color:#fff;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding:4px 14px;border-radius:9999px;}
+  .plan-name{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.15em;color:var(--muted-foreground);}
+  .plan.featured .plan-name{color:rgba(255,255,255,.7);}
+  .plan-price{font-family:var(--font-display);font-weight:700;font-size:3rem;margin-top:.75rem;letter-spacing:-.02em;line-height:1;color:var(--foreground);}
+  .plan.featured .plan-price{color:#fff;}
+  .plan-period{font-size:.875rem;margin-top:.5rem;color:var(--muted-foreground);}
+  .plan.featured .plan-period{color:rgba(255,255,255,.75);}
+  .plan-yearly{font-size:.75rem;font-style:italic;margin-top:.25rem;color:var(--muted-foreground);}
+  .plan.featured .plan-yearly{color:rgba(255,255,255,.55);}
+  .plan-desc{font-size:.875rem;line-height:1.7;margin-top:1.5rem;flex:1;color:var(--muted-foreground);}
+  .plan.featured .plan-desc{color:rgba(255,255,255,.85);}
+  .plan-cta{margin-top:1.75rem;text-align:center;padding:.75rem;border-radius:9999px;font-size:.875rem;font-weight:700;border:2px solid var(--primary);color:var(--primary);transition:all .2s;}
+  .plan-cta:hover{background:var(--primary);color:#fff;}
+  .plan.featured .plan-cta{background:#fff;color:var(--primary-dark);border-color:#fff;}
+  .plan.featured .plan-cta:hover{background:var(--accent-light);border-color:var(--accent-light);}
+
+  /* FAQ */
+  .faq-wrap{max-width:48rem;margin:0 auto;}
+  .faq-list{margin-top:3rem;}
+  .faq-item{padding:1.25rem 0;border-top:1px solid var(--border);}
+  .faq-item:first-child{border-top:0;}
+  .faq-q{width:100%;display:flex;align-items:center;justify-content:space-between;gap:1rem;text-align:left;font-size:1rem;font-weight:600;color:var(--foreground);background:transparent;cursor:pointer;transition:color .2s;}
+  .faq-q:hover{color:var(--primary);}
+  .faq-chev{color:var(--primary);font-size:1.25rem;transition:transform .3s;flex-shrink:0;}
+  .faq-item.open .faq-chev{transform:rotate(180deg);}
+  .faq-a{overflow:hidden;max-height:0;transition:max-height .3s, margin-top .3s;font-size:.875rem;color:var(--muted-foreground);line-height:1.7;}
+  .faq-item.open .faq-a{max-height:10rem;margin-top:.75rem;}
+
+  /* CTA banner */
+  .cta-section{padding:0 1.5rem 6rem;}
+  @media(min-width:1024px){.cta-section{padding-left:2.5rem;padding-right:2.5rem;}}
+  .cta-banner{position:relative;max-width:72rem;margin:0 auto;border-radius:32px;overflow:hidden;padding:4rem 2rem;text-align:center;color:#fff;background:var(--gradient-primary);box-shadow:var(--shadow-lg);}
+  @media(min-width:640px){.cta-banner{padding:5rem 4rem;}}
+  .cta-blob-1{position:absolute;top:-4rem;right:-4rem;width:16rem;height:16rem;border-radius:9999px;background:rgba(255,255,255,.08);filter:blur(40px);pointer-events:none;}
+  .cta-blob-2{position:absolute;bottom:-4rem;left:-3rem;width:14rem;height:14rem;border-radius:9999px;background:rgba(0,0,0,.06);filter:blur(40px);pointer-events:none;}
+  .cta-title{position:relative;font-family:var(--font-display);font-weight:700;color:#fff;line-height:1.05;letter-spacing:-.025em;font-size:clamp(30px,3.8vw,52px);}
+  .cta-title em{font-style:italic;color:var(--accent);}
+  .cta-sub{position:relative;margin-top:1.25rem;font-size:1rem;color:rgba(255,255,255,.8);}
+  .cta-btn{position:relative;display:inline-flex;align-items:center;gap:.5rem;margin-top:2rem;padding:1rem 2rem;border-radius:9999px;background:#fff;color:var(--primary-dark);font-size:.9rem;font-weight:700;transition:all .2s;}
+  .cta-btn:hover{transform:translateY(-2px);background:var(--accent-light);}
+
+  /* Footer */
+  footer{background:#0d2b1e;color:rgba(255,255,255,.55);padding:3.5rem 1.5rem 2rem;}
+  @media(min-width:1024px){footer{padding-left:2.5rem;padding-right:2.5rem;}}
+  .footer-inner{max-width:72rem;margin:0 auto;}
+
+  /* Footer top: brand + contact info */
+  .footer-top{display:grid;grid-template-columns:1fr;gap:3rem;padding-bottom:2.5rem;border-bottom:1px solid rgba(255,255,255,.1);}
+  @media(min-width:768px){.footer-top{grid-template-columns:1fr 1fr;}}
+  @media(min-width:1024px){.footer-top{grid-template-columns:2fr 3fr;}}
+
+  .footer-brand-col{}
+  .footer-brand{display:flex;align-items:center;gap:.625rem;margin-bottom:1rem;}
+  .footer-logo{width:32px;height:32px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-family:var(--font-sans);font-weight:700;background:var(--primary);color:#fff;font-size:1rem;}
+  .footer-name{font-weight:700;color:#fff;font-size:1.1rem;letter-spacing:-.01em;}
+  .footer-address{font-size:.78rem;line-height:1.7;color:rgba(255,255,255,.45);max-width:22rem;}
+
+  /* Contact grid */
+  .footer-contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem 2rem;}
+  .footer-contact-item{display:flex;align-items:flex-start;gap:.625rem;}
+  .fci-icon{width:20px;height:20px;flex-shrink:0;margin-top:.05rem;opacity:.65;}
+  .fci-icon svg{width:20px;height:20px;fill:rgba(255,255,255,.65);}
+  .fci-label{font-size:.72rem;font-weight:700;color:rgba(255,255,255,.55);letter-spacing:.05em;text-transform:uppercase;margin-bottom:.2rem;}
+  .fci-value{font-size:.82rem;color:rgba(255,255,255,.75);line-height:1.6;}
+  .fci-value a{color:rgba(255,255,255,.75);transition:color .2s;}
+  .fci-value a:hover{color:#fff;}
+
+  /* Footer bottom */
+  .footer-bottom{margin-top:2rem;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1rem;font-size:.72rem;color:rgba(255,255,255,.35);}
+  .footer-links{display:flex;gap:1.5rem;}
+  .footer-links a{color:rgba(255,255,255,.35);transition:color .2s;}
+  .footer-links a:hover{color:rgba(255,255,255,.75);}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container nav-inner">
+    <a href="#top" class="brand">
+      <div class="brand-logo">i</div>
+      <span class="brand-name">finny</span>
+    </a>
+    <div class="nav-links">
+      <a href="#fitur">Fitur</a>
+      <a href="#harga">Harga</a>
+      <a href="#faq">FAQ</a>
+      <a href="#kontak">Kontak</a>
+    </div>
+    <a href="https://t.me/fibuddy_bot" onclick="gtag('event','cta_click',{'location':'navbar'})" class="btn-primary">Coba Gratis →</a>
+  </div>
+</nav>
+
+<main>
+  <!-- HERO -->
+  <section id="top" class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-mesh"></div>
+    <div class="container hero-inner">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <h1 class="hero-title">
+            Kelola keuangan<br />
+            <em class="grad-text">secepat kirim chat</em><br />
+            <span>ke teman</span>
+          </h1>
+          <p class="hero-sub">💬 Chat, 📸 jepret, atau 🎙️ suara; Finny beresin semua. Teman curhat, biar nggak kepikiran keuangan.</p>
+          <div class="hero-ctas">
+            <a href="https://t.me/fibuddy_bot" onclick="gtag('event','cta_click',{'location':'hero'})" class="btn-primary lg">Coba Gratis →</a>
+            <a href="#fitur" class="btn-secondary">Lihat fitur ↓</a>
+          </div>
+        </div>
+        <div class="hero-img-wrap">
+          <div class="hero-img-inner">
+            <div class="hero-glow-outer"></div>
+            <div class="hero-glow-inner"></div>
+            <img class="hero-img" src="assets/hero-finny.png" alt="Pengguna Finny mencatat pengeluaran lewat chat Telegram" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section id="fitur" class="block">
+    <div class="container">
+      <div class="center max-2">
+        <span class="eyebrow">Fitur Utama</span>
+        <h2 class="section-title">Semua yang kamu butuhkan untuk <em class="grad-text">tertib finansial</em></h2>
+        <p class="section-sub">Fitur lengkap untuk mencatat, menganalisis, dan mengontrol keuanganmu sehari-hari.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card"><div class="feature-icon">✍️</div><h3 class="feature-title">Tulis transaksi</h3><p class="feature-desc">Cukup ketik transaksi dan nominalnya, Finny langsung simpan secara otomatis.</p></div>
+        <div class="feature-card"><div class="badges"><span class="badge lite">Lite</span><span class="badge pro">Pro</span></div><div class="feature-icon">📸</div><h3 class="feature-title">Foto struk</h3><p class="feature-desc">Foto saja struk belanjaanmu, Finny baca nominalnya secara instan.</p></div>
+        <div class="feature-card"><div class="badges"><span class="badge lite">Lite</span><span class="badge pro">Pro</span></div><div class="feature-icon">🎙️</div><h3 class="feature-title">Rekam suara</h3><p class="feature-desc">Lagi nyetir? Rekam suaramu, Finny yang akan mencatat transaksinya.</p></div>
+        <div class="feature-card"><div class="feature-icon">🧾</div><h3 class="feature-title">Split bill</h3><p class="feature-desc">Hitung dan bagi tagihan bareng teman langsung dari chat, tanpa ribet.</p></div>
+        <div class="feature-card"><div class="feature-icon">📊</div><h3 class="feature-title">Laporan otomatis</h3><p class="feature-desc">Cek ringkasan keuangan per kategori, harian, bulanan — kapan pun kamu mau.</p></div>
+        <div class="feature-card"><div class="feature-icon">🎯</div><h3 class="feature-title">Budgeting</h3><p class="feature-desc">Set limit per kategori dan dapat notifikasi kalau hampir kelewat batas.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="harga" class="block pricing">
+    <div class="pricing-bg"></div>
+    <div class="pricing-mesh"></div>
+    <div class="container">
+      <div class="center max-2">
+        <span class="eyebrow">Harga</span>
+        <h2 class="section-title">Pilih paket yang <em class="grad-text">pas buat kamu</em></h2>
+        <p class="section-sub">Mulai gratis, upgrade kapan saja. Tanpa kontrak jangka panjang.</p>
+      </div>
+      <div class="pricing-grid">
+        <div class="plan">
+          <div class="plan-name">Gratis</div>
+          <div class="plan-price">Rp 0</div>
+          <div class="plan-period">selamanya</div>
+          <div class="plan-yearly" style="opacity:0">.</div>
+          <p class="plan-desc">Untuk kamu yang baru mulai tertib finansial. Catat transaksi, lihat saldo, laporan basic.</p>
+          <a href="https://t.me/fibuddy_bot" onclick="gtag('event','cta_click',{'location':'pricing_free'})" class="plan-cta">Mulai Sekarang</a>
+        </div>
+        <div class="plan featured">
+          <span class="plan-tag">Populer</span>
+          <div class="plan-name">Lite</div>
+          <div class="plan-price">Rp 4.900</div>
+          <div class="plan-period">per bulan</div>
+          <div class="plan-yearly">atau Rp 49.000 / tahun</div>
+          <p class="plan-desc">Untuk kamu yang serius merapikan pengeluaran. Termasuk foto struk dan rekam suara.</p>
+          <a href="https://t.me/fibuddy_bot" onclick="gtag('event','cta_click',{'location':'pricing_lite'})" class="plan-cta">Pilih Lite</a>
+        </div>
+        <div class="plan">
+          <div class="plan-name">Pro</div>
+          <div class="plan-price">Rp 14.900</div>
+          <div class="plan-period">per bulan</div>
+          <div class="plan-yearly">atau Rp 149.000 / tahun</div>
+          <p class="plan-desc">Analisis mendalam, sinkronisasi data, dan semua fitur premium tanpa batas.</p>
+          <a href="https://t.me/fibuddy_bot" onclick="gtag('event','cta_click',{'location':'pricing_pro'})" class="plan-cta">Pilih Pro</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="block">
+    <div class="container faq-wrap">
+      <div class="center">
+        <span class="eyebrow">FAQ</span>
+        <h2 class="section-title">Pertanyaan yang <em class="grad-text">sering ditanya</em></h2>
+      </div>
+      <div class="faq-list" id="faq-list">
+        <div class="faq-item open"><button class="faq-q" type="button">Apakah data transaksi saya aman?<span class="faq-chev">⌄</span></button><div class="faq-a">Data kamu aman dan bersifat privat. Privasi adalah prioritas kami — data tidak dijual atau dibagikan ke pihak ketiga.</div></div>
+        <div class="faq-item"><button class="faq-q" type="button">Apakah data hilang jika ganti HP?<span class="faq-chev">⌄</span></button><div class="faq-a">Tidak. Data tersimpan di server kami, bukan di HP kamu. Cukup login Telegram di perangkat baru dan semua data tetap ada.</div></div>
+        <div class="faq-item"><button class="faq-q" type="button">Bisa untuk keuangan bisnis?<span class="faq-chev">⌄</span></button><div class="faq-a">Didesain untuk personal finance, tapi bisa juga untuk memisahkan dan mencatat pengeluaran bisnis kecil atau freelance.</div></div>
+        <div class="faq-item"><button class="faq-q" type="button">Bisa berhenti langganan kapan saja?<span class="faq-chev">⌄</span></button><div class="faq-a">Bisa kapan pun melalui bot Telegram. Tidak ada kontrak jangka panjang. Tapi, yakin mau berhenti? 😄</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="cta-banner">
+      <div class="cta-blob-1"></div>
+      <div class="cta-blob-2"></div>
+      <h2 class="cta-title">Mulai catat keuanganmu<br /><em>hari ini juga</em></h2>
+      <p class="cta-sub">Gratis. Tanpa install. Langsung di Telegram.</p>
+      <a href="https://t.me/fibuddy_bot" onclick="gtag('event','cta_click',{'location':'footer_cta'})" class="cta-btn">Coba Gratis →</a>
+    </div>
+  </section>
+</main>
+
+<footer id="kontak">
+  <div class="footer-inner">
+    <div class="footer-top">
+
+      <!-- Brand + address -->
+      <div class="footer-brand-col">
+        <div class="footer-brand">
+          <div class="footer-logo">f</div>
+          <span class="footer-name">finny</span>
+        </div>
+        <p class="footer-address">Perum Diyan Sarana Graha No.21, Blulukan,<br />Colomadu, Karanganyar, Jawa Tengah</p>
+      </div>
+
+      <!-- Contact grid -->
+      <div class="footer-contact-grid">
+
+        <!-- Phone -->
+        <div class="footer-contact-item">
+          <div class="fci-icon">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.47 11.47 0 003.59.57 1 1 0 011 1V21a1 1 0 01-1 1A17 17 0 013 5a1 1 0 011-1h3.5a1 1 0 011 1 11.47 11.47 0 00.57 3.59 1 1 0 01-.25 1.01l-2.2 2.19z"/></svg>
+          </div>
+          <div>
+            <div class="fci-label">Phone</div>
+            <div class="fci-value"><a href="tel:+628155193468">+62 8155193468</a></div>
+          </div>
+        </div>
+
+        <!-- Email -->
+        <div class="footer-contact-item">
+          <div class="fci-icon">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          </div>
+          <div>
+            <div class="fci-label">E-mail</div>
+            <div class="fci-value" id="footer-email"></div>
+          </div>
+        </div>
+
+        <!-- Telegram -->
+        <div class="footer-contact-item">
+          <div class="fci-icon">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M11.944 0A12 12 0 000 12a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0012 0a12 12 0 00-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 01.171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+          </div>
+          <div>
+            <div class="fci-label">Telegram</div>
+            <div class="fci-value"><a href="https://t.me/finnyadmin" target="_blank" rel="noopener">@finnyadmin</a></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="footer-bottom">
+      <div>© 2026 Finny. Semua hak dilindungi.</div>
+      <div class="footer-links">
+        <a href="#">Privasi</a>
+        <a href="#">Syarat &amp; Ketentuan</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('#faq-list .faq-item').forEach(function(item){
+    item.querySelector('.faq-q').addEventListener('click', function(){
+      var wasOpen = item.classList.contains('open');
+      document.querySelectorAll('#faq-list .faq-item').forEach(function(i){ i.classList.remove('open'); });
+      if(!wasOpen) item.classList.add('open');
+    });
+  });
+
+  // Build email link via JS to avoid Cloudflare email obfuscation
+  (function(){
+    var u = 'financialfinny';
+    var d = 'gmail.com';
+    var el = document.getElementById('footer-email');
+    if(el){
+      var a = document.createElement('a');
+      a.href = 'mailto:' + u + '@' + d;
+      a.textContent = u + '@' + d;
+      el.appendChild(a);
+    }
+  })();
+</script>
+
+</body>
+</html>
