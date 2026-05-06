@@ -662,7 +662,8 @@
     spinner.style.display = 'block';
 
     try {
-      var res = await fetch('/api/create-payment', {
+      var BOT_API = 'https://finny-bot.fly.dev'; // ganti jika domain Fly.io berbeda
+      var res = await fetch(BOT_API + '/api/web-payment/create', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ plan: modalPlan, period: modalPeriod })
