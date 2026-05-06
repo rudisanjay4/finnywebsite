@@ -675,7 +675,10 @@
       gtag('event', 'payment_initiated', { plan: modalPlan, period: modalPeriod });
       window.location.href = data.paymentUrl;
     } catch (err) {
-      errorEl.textContent = err.message || 'Terjadi kesalahan. Silakan coba lagi.';
+      var isNetworkError = err instanceof TypeError;
+      errorEl.textContent = isNetworkError
+        ? 'Gagal terhubung ke server. Periksa koneksi internet Anda dan coba lagi.'
+        : (err.message || 'Terjadi kesalahan. Silakan coba lagi.');
       errorEl.style.display = 'block';
       isProcessing = false;
       btn.disabled = false;
