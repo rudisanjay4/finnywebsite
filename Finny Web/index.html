@@ -670,15 +670,19 @@
       });
       var data = await res.json();
       if (!res.ok || !data.paymentUrl) {
-        throw new Error(data.error || 'Gagal membuat pembayaran.');
+        var apiErr = new Error(data.error || 'Gagal membuat pembayaran.');
+        apiErr.statusCode = res.status;
+        throw apiErr;
       }
       gtag('event', 'payment_initiated', { plan: modalPlan, period: modalPeriod });
       window.location.href = data.paymentUrl;
     } catch (err) {
       var isNetworkError = err instanceof TypeError;
-      errorEl.textContent = isNetworkError
+      var msg = isNetworkError
         ? 'Gagal terhubung ke server. Periksa koneksi internet Anda dan coba lagi.'
         : (err.message || 'Terjadi kesalahan. Silakan coba lagi.');
+      var code = err.statusCode ? ' [' + err.statusCode + ']' : '';
+      errorEl.textContent = msg + code;
       errorEl.style.display = 'block';
       isProcessing = false;
       btn.disabled = false;
