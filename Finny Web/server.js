@@ -43,16 +43,13 @@ function generateReference() {
 
 // POST /api/create-payment
 app.post('/api/create-payment', async (req, res) => {
-  const { plan, period, telegramUsername } = req.body;
+  const { plan, period } = req.body;
 
   if (!['lite', 'pro'].includes(plan)) {
     return res.status(400).json({ error: 'Plan tidak valid. Pilih lite atau pro.' });
   }
   if (!['monthly', 'yearly'].includes(period)) {
     return res.status(400).json({ error: 'Period tidak valid. Pilih monthly atau yearly.' });
-  }
-  if (!telegramUsername || telegramUsername.trim().length < 2) {
-    return res.status(400).json({ error: 'Username Telegram tidak valid.' });
   }
 
   const amount = PLAN_AMOUNTS[plan][period];
@@ -69,7 +66,6 @@ app.post('/api/create-payment', async (req, res) => {
   const payments = loadPayments();
   payments[reference] = {
     reference,
-    telegramUsername: telegramUsername.trim().replace(/^@/, ''),
     plan,
     period,
     amount,
@@ -90,7 +86,7 @@ app.post('/api/create-payment', async (req, res) => {
         returnUrl,
         expirationTime: 1440,
         itemName,
-        customerVaName: telegramUsername.trim().replace(/^@/, ''),
+        customerVaName: 'Finny User',
       },
       {
         headers: {
@@ -178,15 +174,38 @@ app.get('/api/verify-payment/:reference', (req, res) => {
   if (payment.status !== 'paid') {
     return res.status(402).json({ error: 'Pembayaran belum selesai.', status: payment.status });
   }
+  if (payment.activated_at) {
+    return res.status(409).json({ error: 'Kode sudah pernah digunakan.', activated_at: payment.activated_at });
+  }
 
   res.json({
     reference: payment.reference,
-    telegramUsername: payment.telegramUsername,
     plan: payment.plan,
     period: payment.period,
     amount: payment.amount,
     paidAt: payment.paidAt,
   });
+});
+
+// POST /api/activate — dipanggil bot setelah berhasil aktivasi, tandai kode sudah dipakai
+app.post('/api/activate', (req, res) => {
+  const { reference, telegramUserId } = req.body;
+  if (!reference || !telegramUserId) {
+    return res.status(400).json({ error: 'reference dan telegramUserId wajib diisi.' });
+  }
+
+  const payments = loadPayments();
+  const payment = payments[reference];
+
+  if (!payment) return res.status(404).json({ error: 'Kode tidak ditemukan.' });
+  if (payment.status !== 'paid') return res.status(402).json({ error: 'Belum dibayar.' });
+  if (payment.activated_at) return res.status(409).json({ error: 'Sudah digunakan.' });
+
+  payments[reference].activated_by = telegramUserId;
+  payments[reference].activated_at = new Date().toISOString();
+  savePayments(payments);
+
+  res.json({ ok: true, plan: payment.plan, period: payment.period });
 });
 
 // GET / — landing page

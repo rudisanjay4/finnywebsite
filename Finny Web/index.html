@@ -473,12 +473,7 @@
       <button type="button" class="period-btn" id="period-yearly" onclick="setModalPeriod('yearly')">Tahunan <small style="font-weight:400;font-size:.75em">(hemat 2 bln)</small></button>
     </div>
 
-    <div class="modal-field">
-      <label class="modal-label" for="tg-username">Username Telegram kamu</label>
-      <input class="modal-input" type="text" id="tg-username" placeholder="contoh: @johndoe" autocomplete="off" />
-      <div class="modal-hint">Digunakan untuk verifikasi aktivasi paket di bot.</div>
-      <div class="modal-error" id="tg-error">Username Telegram tidak valid.</div>
-    </div>
+    <div class="modal-error" id="pay-error" style="margin-bottom:.75rem"></div>
 
     <button type="button" class="modal-submit" id="pay-btn" onclick="initiatePayment()">
       <span id="pay-btn-text">Bayar Sekarang</span>
@@ -630,11 +625,9 @@
     document.getElementById('period-monthly').classList.toggle('active', modalPeriod === 'monthly');
     document.getElementById('period-yearly').classList.toggle('active', modalPeriod === 'yearly');
     updateModalPrice();
-    document.getElementById('tg-username').value = '';
-    document.getElementById('tg-error').style.display = 'none';
+    document.getElementById('pay-error').style.display = 'none';
     document.getElementById('checkout-modal').classList.add('open');
     document.body.style.overflow = 'hidden';
-    setTimeout(function(){ document.getElementById('tg-username').focus(); }, 300);
   }
 
   function closeCheckout() {
@@ -657,15 +650,7 @@
   async function initiatePayment() {
     if (isProcessing) return;
 
-    var rawUsername = document.getElementById('tg-username').value.trim();
-    var username = rawUsername.replace(/^@/, '');
-    var errorEl = document.getElementById('tg-error');
-
-    if (username.length < 3) {
-      errorEl.textContent = 'Masukkan username Telegram kamu (minimal 3 karakter).';
-      errorEl.style.display = 'block';
-      return;
-    }
+    var errorEl = document.getElementById('pay-error');
     errorEl.style.display = 'none';
 
     isProcessing = true;
@@ -680,7 +665,7 @@
       var res = await fetch('/api/create-payment', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ plan: modalPlan, period: modalPeriod, telegramUsername: username })
+        body: JSON.stringify({ plan: modalPlan, period: modalPeriod })
       });
       var data = await res.json();
       if (!res.ok || !data.paymentUrl) {
