@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Status Pembayaran — Finny</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" />
+<style>
+  :root {
+    --primary: #22aa7c;
+    --primary-dark: #008f67;
+    --accent-light: #e7fbf2;
+    --accent: #a2e5ca;
+    --foreground: #0d2b1e;
+    --muted: #4a6b5c;
+    --border: #cce8da;
+    --gradient-primary: linear-gradient(135deg, #005c45 0%, #008f67 40%, #22aa7c 70%, #53bb9d 100%);
+    --font-display: 'Fraunces', Georgia, serif;
+    --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: var(--font-sans);
+    background: #f3faf6;
+    color: var(--foreground);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1.5rem;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .card {
+    background: #fff;
+    border-radius: 24px;
+    padding: 2.5rem 2rem;
+    max-width: 480px;
+    width: 100%;
+    box-shadow: 0 24px 60px rgba(0,143,103,0.12);
+    text-align: center;
+  }
+
+  .icon {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    margin: 0 auto 1.5rem;
+  }
+  .icon.success { background: var(--accent-light); }
+  .icon.failed  { background: #fef2f2; }
+  .icon.pending { background: #fffbeb; }
+
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.75rem;
+    letter-spacing: -.02em;
+    line-height: 1.1;
+    color: var(--foreground);
+  }
+  .subtitle {
+    font-size: .9rem;
+    color: var(--muted);
+    margin-top: .625rem;
+    line-height: 1.6;
+  }
+
+  /* Reference code box */
+  .ref-box {
+    margin-top: 1.75rem;
+    background: var(--accent-light);
+    border: 1.5px dashed var(--accent);
+    border-radius: 14px;
+    padding: 1.25rem 1rem;
+  }
+  .ref-label {
+    font-size: .7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: var(--primary-dark);
+    margin-bottom: .5rem;
+  }
+  .ref-code {
+    font-family: 'Courier New', monospace;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--foreground);
+    letter-spacing: .04em;
+    word-break: break-all;
+  }
+  .copy-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: .375rem;
+    margin-top: .875rem;
+    padding: 6px 16px;
+    border-radius: 9999px;
+    font-size: .8rem;
+    font-weight: 600;
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: filter .2s;
+  }
+  .copy-btn:hover { filter: brightness(1.1); }
+  .copy-btn.copied { background: #166534; }
+
+  /* Instructions */
+  .instructions {
+    margin-top: 1.5rem;
+    background: #f9fafb;
+    border-radius: 12px;
+    padding: 1.125rem 1rem;
+    text-align: left;
+  }
+  .instructions-title {
+    font-size: .78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--muted);
+    margin-bottom: .75rem;
+  }
+  .step {
+    display: flex;
+    gap: .625rem;
+    align-items: flex-start;
+    font-size: .85rem;
+    color: var(--foreground);
+    line-height: 1.5;
+  }
+  .step + .step { margin-top: .625rem; }
+  .step-num {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #fff;
+    font-size: .7rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: .1rem;
+  }
+  .command {
+    display: inline-block;
+    background: #e8edf0;
+    border-radius: 6px;
+    padding: 1px 7px;
+    font-family: 'Courier New', monospace;
+    font-size: .8rem;
+  }
+
+  /* Buttons */
+  .btn-group {
+    display: flex;
+    flex-direction: column;
+    gap: .75rem;
+    margin-top: 1.75rem;
+  }
+  .btn-tg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    padding: .875rem;
+    border-radius: 9999px;
+    background: var(--gradient-primary);
+    color: #fff;
+    font-size: .9rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: filter .2s;
+  }
+  .btn-tg:hover { filter: brightness(1.1); }
+  .btn-back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: .75rem;
+    border-radius: 9999px;
+    background: transparent;
+    border: 1.5px solid var(--border);
+    color: var(--muted);
+    font-size: .875rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all .2s;
+  }
+  .btn-back:hover { border-color: var(--primary); color: var(--primary); }
+
+  /* Failed / pending states */
+  .error-msg {
+    margin-top: 1.5rem;
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    border-radius: 12px;
+    padding: 1rem;
+    font-size: .875rem;
+    color: #991b1b;
+    line-height: 1.6;
+  }
+  .pending-msg {
+    margin-top: 1.5rem;
+    background: #fffbeb;
+    border: 1px solid #fde68a;
+    border-radius: 12px;
+    padding: 1rem;
+    font-size: .875rem;
+    color: #92400e;
+    line-height: 1.6;
+  }
+
+  /* Branding */
+  .brand {
+    margin-top: 2rem;
+    font-size: .75rem;
+    color: #9ca3af;
+  }
+  .brand a { color: var(--primary); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<div class="card" id="card">
+  <!-- Diisi oleh JS -->
+</div>
+
+<script>
+(function () {
+  var params = new URLSearchParams(window.location.search);
+  var reference = params.get('reference') || '';
+  var resultCode = params.get('resultCode') || '';
+
+  var card = document.getElementById('card');
+
+  function escapeHtml(s) {
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  function renderSuccess() {
+    card.innerHTML = [
+      '<div class="icon success">🎉</div>',
+      '<h1>Pembayaran Berhasil!</h1>',
+      '<p class="subtitle">Terima kasih. Simpan kode referensi di bawah ini dan gunakan di bot Finny untuk mengaktifkan paketmu.</p>',
+
+      '<div class="ref-box">',
+        '<div class="ref-label">Kode Aktivasi — Simpan kode ini!</div>',
+        '<div class="ref-code" id="ref-code">' + escapeHtml(reference) + '</div>',
+        '<button class="copy-btn" id="copy-btn" onclick="copyRef()">📋 Salin Kode</button>',
+      '</div>',
+
+      '<div class="instructions">',
+        '<div class="instructions-title">Cara Aktifkan Paket di Telegram</div>',
+        '<div class="step"><div class="step-num">1</div><div>Salin kode aktivasi di atas</div></div>',
+        '<div class="step"><div class="step-num">2</div><div>Buka <strong>@fibuddy_bot</strong> di Telegram</div></div>',
+        '<div class="step"><div class="step-num">3</div><div>Kirim perintah:<br><span class="command">/aktivasi ' + escapeHtml(reference) + '</span></div></div>',
+        '<div class="step"><div class="step-num">4</div><div>Paket langsung aktif di akun Telegram kamu 🚀</div></div>',
+      '</div>',
+      '<p style="font-size:.78rem;color:#6b7280;margin-top:.875rem;line-height:1.5;">⚠️ Kode hanya bisa digunakan <strong>sekali</strong>. Jangan bagikan ke orang lain.</p>',
+
+      '<div class="btn-group">',
+        '<a href="https://t.me/fibuddy_bot" class="btn-tg" target="_blank" rel="noopener">',
+          '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 000 12a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0012 0a12 12 0 00-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 01.171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>',
+          'Buka @fibuddy_bot di Telegram',
+        '</a>',
+        '<a href="/" class="btn-back">← Kembali ke Beranda</a>',
+      '</div>',
+
+      '<div class="brand">Powered by <a href="/">Finny</a></div>',
+    ].join('');
+  }
+
+  function renderPending() {
+    card.innerHTML = [
+      '<div class="icon pending">⏳</div>',
+      '<h1>Menunggu Pembayaran</h1>',
+      '<p class="subtitle">Pembayaran sedang diproses. Biasanya selesai dalam beberapa menit.</p>',
+      '<div class="pending-msg">',
+        'Jika kamu sudah melakukan pembayaran, tunggu sebentar lalu cek lagi. ',
+        'Jika dalam 10 menit belum aktif, hubungi <a href="https://t.me/finnyadmin">@finnyadmin</a>.',
+      '</div>',
+      reference ? [
+        '<div class="ref-box" style="margin-top:1.5rem">',
+          '<div class="ref-label">Kode Referensi</div>',
+          '<div class="ref-code">' + escapeHtml(reference) + '</div>',
+        '</div>',
+      ].join('') : '',
+      '<div class="btn-group">',
+        '<a href="https://t.me/fibuddy_bot" class="btn-tg" target="_blank" rel="noopener">Hubungi Support</a>',
+        '<a href="/" class="btn-back">← Kembali ke Beranda</a>',
+      '</div>',
+      '<div class="brand">Powered by <a href="/">Finny</a></div>',
+    ].join('');
+  }
+
+  function renderFailed() {
+    card.innerHTML = [
+      '<div class="icon failed">❌</div>',
+      '<h1>Pembayaran Gagal</h1>',
+      '<p class="subtitle">Maaf, pembayaranmu tidak berhasil diproses. Tidak ada biaya yang dikenakan.</p>',
+      '<div class="error-msg">',
+        'Kamu bisa mencoba lagi dengan metode pembayaran lain. Jika masalah berlanjut, hubungi <a href="https://t.me/finnyadmin">@finnyadmin</a>.',
+      '</div>',
+      '<div class="btn-group">',
+        '<a href="/#harga" class="btn-tg">Coba Lagi</a>',
+        '<a href="/" class="btn-back">← Kembali ke Beranda</a>',
+      '</div>',
+      '<div class="brand">Powered by <a href="/">Finny</a></div>',
+    ].join('');
+  }
+
+  // resultCode 00 = sukses, kosong = pending/unknown
+  if (resultCode === '00') {
+    renderSuccess();
+  } else if (resultCode === '' || resultCode === null) {
+    renderPending();
+  } else {
+    renderFailed();
+  }
+
+  window.copyRef = function () {
+    var code = document.getElementById('ref-code');
+    var btn = document.getElementById('copy-btn');
+    if (!code || !btn) return;
+    navigator.clipboard.writeText(code.textContent).then(function () {
+      btn.textContent = '✓ Tersalin!';
+      btn.classList.add('copied');
+      setTimeout(function () {
+        btn.textContent = '📋 Salin Kode';
+        btn.classList.remove('copied');
+      }, 2500);
+    });
+  };
+})();
+</script>
+
+</body>
+</html>
