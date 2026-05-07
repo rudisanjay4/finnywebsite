@@ -422,6 +422,9 @@
         <span class="payment-badge">Dana</span>
         <span class="payment-badge">ShopeePay</span>
       </div>
+      <div style="text-align:center;margin-top:.875rem;font-size:.8rem;color:var(--muted-foreground)">
+        Sudah bayar tapi lupa kode aktivasi? <a href="#" onclick="openRetrieve();return false;" style="color:var(--primary);font-weight:600">Kirim ulang ke email</a>
+      </div>
     </div>
   </section>
 
@@ -473,6 +476,12 @@
       <button type="button" class="period-btn" id="period-yearly" onclick="setModalPeriod('yearly')">Tahunan <small style="font-weight:400;font-size:.75em">(hemat 2 bln)</small></button>
     </div>
 
+    <div class="modal-field">
+      <label class="modal-label" for="checkout-email">Email <span style="color:var(--muted-foreground);font-weight:400">(untuk menerima kode aktivasi)</span></label>
+      <input type="email" class="modal-input" id="checkout-email" placeholder="email@kamu.com" autocomplete="email" />
+      <div class="modal-error" id="email-error"></div>
+    </div>
+
     <div class="modal-error" id="pay-error" style="margin-bottom:.75rem"></div>
 
     <button type="button" class="modal-submit" id="pay-btn" onclick="initiatePayment()">
@@ -482,7 +491,33 @@
 
     <div class="modal-footer">
       Transaksi aman diproses oleh <a href="https://duitku.com" target="_blank" rel="noopener">Duitku</a> &middot;
-      <a href="#">Syarat &amp; Ketentuan</a>
+      <a href="#" onclick="closeCheckout();openRetrieve();return false;">Lupa kode aktivasi?</a>
+    </div>
+  </div>
+</div>
+
+<!-- Retrieve Code Modal -->
+<div class="modal-overlay" id="retrieve-modal" onclick="handleRetrieveOverlayClick(event)">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="retrieve-modal-title">
+    <div class="modal-header">
+      <div class="modal-title" id="retrieve-modal-title">Kirim Ulang Kode Aktivasi</div>
+      <button class="modal-close" onclick="closeRetrieve()" type="button" aria-label="Tutup">✕</button>
+    </div>
+    <p style="font-size:.875rem;color:var(--muted-foreground);margin-bottom:1.25rem;line-height:1.5">Masukkan email yang kamu gunakan saat pembayaran. Kode aktivasi akan dikirim ulang ke email tersebut.</p>
+    <div class="modal-field">
+      <label class="modal-label" for="retrieve-email">Email</label>
+      <input type="email" class="modal-input" id="retrieve-email" placeholder="email@kamu.com" autocomplete="email" />
+      <div class="modal-error" id="retrieve-error"></div>
+    </div>
+    <div id="retrieve-success" style="display:none;font-size:.875rem;color:#16a34a;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;padding:.75rem 1rem;margin-bottom:1rem">
+      Kode aktivasi sudah dikirim! Cek inbox (atau folder spam) kamu.
+    </div>
+    <button type="button" class="modal-submit" id="retrieve-btn" onclick="resendCode()">
+      <span id="retrieve-btn-text">Kirim Kode</span>
+      <div class="modal-loading" id="retrieve-loading"></div>
+    </button>
+    <div class="modal-footer">
+      Butuh bantuan? Hubungi kami di <a id="retrieve-footer-email"></a>
     </div>
   </div>
 </div>
@@ -625,6 +660,8 @@
     document.getElementById('period-monthly').classList.toggle('active', modalPeriod === 'monthly');
     document.getElementById('period-yearly').classList.toggle('active', modalPeriod === 'yearly');
     updateModalPrice();
+    document.getElementById('checkout-email').value = '';
+    document.getElementById('email-error').style.display = 'none';
     document.getElementById('pay-error').style.display = 'none';
     document.getElementById('checkout-modal').classList.add('open');
     document.body.style.overflow = 'hidden';
@@ -653,6 +690,15 @@
     var errorEl = document.getElementById('pay-error');
     errorEl.style.display = 'none';
 
+    var email = document.getElementById('checkout-email').value.trim();
+    var emailErrorEl = document.getElementById('email-error');
+    emailErrorEl.style.display = 'none';
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      emailErrorEl.textContent = 'Masukkan alamat email yang valid.';
+      emailErrorEl.style.display = 'block';
+      return;
+    }
+
     isProcessing = true;
     var btn = document.getElementById('pay-btn');
     var btnText = document.getElementById('pay-btn-text');
@@ -666,7 +712,7 @@
       var res = await fetch(BOT_API + '/api/web-payment/create', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ plan: modalPlan, period: modalPeriod })
+        body: JSON.stringify({ plan: modalPlan, period: modalPeriod, email: email })
       });
       var data = await res.json();
       if (!res.ok || !data.paymentUrl) {
@@ -691,9 +737,77 @@
     }
   }
 
-  // Close modal on Escape key
+  // ── Retrieve Code Modal ───────────────────────────────
+
+  function openRetrieve() {
+    document.getElementById('retrieve-email').value = '';
+    document.getElementById('retrieve-error').style.display = 'none';
+    document.getElementById('retrieve-success').style.display = 'none';
+    document.getElementById('retrieve-modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+    // Build email link to avoid Cloudflare obfuscation
+    var el = document.getElementById('retrieve-footer-email');
+    if (el && !el.href) {
+      var u = 'financialfinny'; var d = 'gmail.com';
+      el.href = 'mailto:' + u + '@' + d;
+      el.textContent = u + '@' + d;
+    }
+  }
+
+  function closeRetrieve() {
+    document.getElementById('retrieve-modal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function handleRetrieveOverlayClick(e) {
+    if (e.target === document.getElementById('retrieve-modal')) closeRetrieve();
+  }
+
+  async function resendCode() {
+    var email = document.getElementById('retrieve-email').value.trim();
+    var errorEl = document.getElementById('retrieve-error');
+    var successEl = document.getElementById('retrieve-success');
+    errorEl.style.display = 'none';
+    successEl.style.display = 'none';
+
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      errorEl.textContent = 'Masukkan alamat email yang valid.';
+      errorEl.style.display = 'block';
+      return;
+    }
+
+    var btn = document.getElementById('retrieve-btn');
+    var btnText = document.getElementById('retrieve-btn-text');
+    var spinner = document.getElementById('retrieve-loading');
+    btn.disabled = true;
+    btnText.textContent = 'Mengirim...';
+    spinner.style.display = 'block';
+
+    try {
+      var BOT_API = 'https://finny-bot-staging.fly.dev';
+      var res = await fetch(BOT_API + '/api/web-payment/resend-code', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email })
+      });
+      var data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Gagal mengirim kode.');
+      successEl.style.display = 'block';
+    } catch (err) {
+      errorEl.textContent = (err instanceof TypeError)
+        ? 'Gagal terhubung ke server. Periksa koneksi internet Anda.'
+        : (err.message || 'Terjadi kesalahan. Silakan coba lagi.');
+      errorEl.style.display = 'block';
+    } finally {
+      btn.disabled = false;
+      btnText.textContent = 'Kirim Kode';
+      spinner.style.display = 'none';
+    }
+  }
+
+  // Close modals on Escape key
   document.addEventListener('keydown', function(e){
-    if (e.key === 'Escape') closeCheckout();
+    if (e.key === 'Escape') { closeCheckout(); closeRetrieve(); }
   });
 </script>
 
