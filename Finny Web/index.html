@@ -366,12 +366,12 @@
             <li>Catat transaksi via chat</li>
             <li>Laporan harian &amp; bulanan</li>
             <li>Split bill</li>
-            <li>Budget 1 kategori</li>
-            <li>Histori transaksi 3 bulan</li>
-            <li class="muted">Foto struk (scan AI)</li>
-            <li class="muted">Rekam suara</li>
-            <li class="muted">Budget unlimited</li>
+            <li>1 kategori budget</li>
+            <li>Histori 3 bulan terakhir</li>
+            <li>Foto struk</li>
+            <li>Rekam suara</li>
           </ul>
+          <p style="font-size:.72rem;color:var(--muted-foreground);margin:.75rem 0 1.25rem;line-height:1.4">Kombinasi foto struk &amp; rekam suara: maks. 30x/bulan</p>
           <a href="https://t.me/fibuddy_bot" onclick="gtag('event','cta_click',{'location':'pricing_free'})" class="plan-cta">Mulai Sekarang</a>
         </div>
 
@@ -379,17 +379,18 @@
         <div class="plan featured">
           <span class="plan-tag">Populer</span>
           <div class="plan-name">Lite</div>
-          <div class="plan-price" id="lite-price">Rp 4.900</div>
+          <div class="plan-price" id="lite-price">Hanya Rp 4.900</div>
           <div class="plan-period" id="lite-period">per bulan</div>
           <div class="plan-yearly" id="lite-note">atau Rp 49.000 / tahun</div>
           <hr class="plan-divider" />
           <ul class="plan-features">
-            <li>Semua fitur Gratis</li>
-            <li>Foto struk (scan AI)</li>
-            <li>Rekam suara</li>
+            <li>Catat transaksi via chat</li>
+            <li>Laporan harian &amp; bulanan</li>
+            <li>Split bill</li>
             <li>Budget unlimited</li>
-            <li>Histori transaksi 12 bulan</li>
-            <li>Notifikasi pengingat renewal</li>
+            <li>Histori 12 bulan terakhir</li>
+            <li>Foto struk: maks. 10x / hari</li>
+            <li>Rekam suara: maks. 10x / hari</li>
           </ul>
           <button type="button" onclick="openCheckout('lite');gtag('event','cta_click',{'location':'pricing_lite'})" class="plan-cta">Pilih Lite</button>
         </div>
@@ -625,7 +626,7 @@
     document.getElementById('btn-yearly').classList.toggle('active', isYearly);
     document.getElementById('billing-save-badge').style.display = isYearly ? '' : 'none';
 
-    document.getElementById('lite-price').textContent = formatRp(PLAN_AMOUNTS.lite[mode]);
+    document.getElementById('lite-price').textContent = 'Hanya ' + formatRp(PLAN_AMOUNTS.lite[mode]);
     document.getElementById('lite-period').textContent = isYearly ? 'per tahun' : 'per bulan';
     document.getElementById('lite-note').textContent = isYearly ? 'setara Rp 4.083 / bulan' : 'atau Rp 49.000 / tahun';
 
