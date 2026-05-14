@@ -1,2 +1,7 @@
 [build]
   publish = "Finny Web"
+
+[[redirects]]
+  from = "/privacy"
+  to = "/privacy.html"
+  status = 200
