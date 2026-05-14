@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Kebijakan Privasi – Finny</title>
+<meta name="description" content="Kebijakan privasi Finny – asisten WhatsApp untuk mencatat pengeluaran pribadi." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" />
+
+<style>
+  :root{
+    --background: #ffffff;
+    --foreground: #0d2b1e;
+    --primary: #22aa7c;
+    --primary-dark: #008f67;
+    --primary-light: #53bb9d;
+    --primary-foreground: #ffffff;
+    --accent-light: #e7fbf2;
+    --muted-foreground: #4a6b5c;
+    --border: #cce8da;
+    --surface: #f3faf6;
+    --gradient-primary: linear-gradient(135deg, #005c45 0%, #008f67 40%, #22aa7c 70%, #53bb9d 100%);
+    --font-display: 'Fraunces', Georgia, serif;
+    --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0;border:0 solid var(--border);}
+  html{scroll-behavior:smooth;}
+  body{font-family:var(--font-sans);background:var(--background);color:var(--foreground);-webkit-font-smoothing:antialiased;line-height:1.7;}
+  a{text-decoration:none;color:inherit;}
+  img{display:block;max-width:100%;height:auto;}
+  .container{max-width:72rem;margin:0 auto;padding:0 1.5rem;}
+  @media(min-width:1024px){.container{padding:0 2.5rem;}}
+
+  /* Navbar */
+  .nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(16px);background:rgba(255,255,255,0.92);border-bottom:1px solid var(--border);}
+  .nav-inner{height:64px;display:flex;align-items:center;justify-content:space-between;}
+  .brand{display:flex;align-items:center;gap:.625rem;}
+  .brand-logo{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:var(--font-sans);font-weight:700;font-size:18px;color:#fff;background:var(--gradient-primary);}
+  .brand-name{font-weight:700;font-size:18px;letter-spacing:-.02em;color:var(--foreground);}
+
+  /* Page content */
+  .page-hero{background:linear-gradient(160deg, #e7fbf2 0%, #f6fdf9 60%, #ffffff 100%);padding:4rem 0 3rem;}
+  .page-hero h1{font-family:var(--font-display);font-size:clamp(1.8rem,4vw,2.6rem);font-weight:700;color:var(--foreground);margin-bottom:.5rem;}
+  .page-hero .updated{font-size:.85rem;color:var(--muted-foreground);}
+
+  .content{padding:3rem 0 5rem;}
+  .prose{max-width:720px;}
+  .prose p{margin-bottom:1.25rem;color:#2d4a3e;font-size:1rem;}
+  .prose h2{font-family:var(--font-display);font-size:1.25rem;font-weight:600;color:var(--foreground);margin:2.5rem 0 .75rem;}
+  .prose ul{list-style:none;margin-bottom:1.25rem;display:flex;flex-direction:column;gap:.5rem;}
+  .prose ul li{padding-left:1.5rem;position:relative;color:#2d4a3e;}
+  .prose ul li::before{content:"–";position:absolute;left:0;color:var(--primary);font-weight:600;}
+  .prose .closing{margin-top:3rem;padding:1.25rem 1.5rem;background:var(--accent-light);border-radius:12px;border-left:4px solid var(--primary);font-size:.95rem;color:var(--foreground);}
+
+  /* Footer */
+  footer{background:#0d2b1e;color:rgba(255,255,255,.55);padding:3.5rem 1.5rem 2rem;}
+  @media(min-width:1024px){footer{padding-left:2.5rem;padding-right:2.5rem;}}
+  .footer-inner{max-width:72rem;margin:0 auto;}
+  .footer-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1rem;font-size:.72rem;color:rgba(255,255,255,.35);}
+  .footer-links{display:flex;gap:1.5rem;}
+  .footer-links a{color:rgba(255,255,255,.35);transition:color .2s;}
+  .footer-links a:hover{color:rgba(255,255,255,.75);}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="brand">
+        <div class="brand-logo">F</div>
+        <span class="brand-name">Finny</span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<section class="page-hero">
+  <div class="container">
+    <h1>Kebijakan Privasi</h1>
+    <p class="updated">Terakhir diperbarui: 14 Mei 2026</p>
+  </div>
+</section>
+
+<section class="content">
+  <div class="container">
+    <div class="prose">
+      <p>Finny adalah asisten WhatsApp untuk mencatat pengeluaran pribadi.</p>
+
+      <h2>1. Data yang kami kumpulkan</h2>
+      <ul>
+        <li>Nomor WhatsApp dan Telegram Anda</li>
+        <li>Isi pesan (nominal, kategori, catatan expense)</li>
+        <li>Waktu pengiriman pesan</li>
+      </ul>
+
+      <h2>2. Cara kami menggunakan data</h2>
+      <ul>
+        <li>Menyimpan riwayat pengeluaran Anda</li>
+        <li>Menghasilkan laporan mingguan/bulanan</li>
+        <li>Membalas perintah Anda di WhatsApp</li>
+      </ul>
+
+      <h2>3. Penyimpanan &amp; keamanan</h2>
+      <p>Data disimpan di server aman. Kami tidak membagikan sebagian maupun seluruh data Anda ke pihak ketiga.</p>
+
+      <h2>4. Hak Anda</h2>
+      <p>Kirim <strong>"hapus akun"</strong> ke nomor Finny, maka seluruh data Anda akan dihapus permanen dalam 7 hari.</p>
+
+      <h2>5. Kontak</h2>
+      <p>Pertanyaan: <a href="mailto:financialfinny@gmail.com" style="color:var(--primary);text-decoration:underline;">financialfinny@gmail.com</a></p>
+
+      <div class="closing">
+        Dengan menggunakan Finny, Anda setuju dengan kebijakan ini.
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-bottom">
+      <div>© 2026 Finny. Semua hak dilindungi.</div>
+      <div class="footer-links">
+        <a href="/privacy">Privasi</a>
+        <a href="#">Syarat &amp; Ketentuan</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
