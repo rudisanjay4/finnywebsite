@@ -531,8 +531,8 @@
         <div class="plan featured">
           <span class="plan-tag">Paling populer</span>
           <div class="plan-name">Lite</div>
-          <div class="plan-price">Rp 49.000<span class="plan-price-unit">/thn</span></div>
-          <div class="plan-effective">efektif Rp 4.083/bln</div>
+          <div class="plan-price" id="lite-price-display">Rp 49.000<span class="plan-price-unit">/thn</span></div>
+          <div class="plan-effective" id="lite-effective-display">efektif Rp 4.083/bln</div>
           <a id="pricing-lite-trial" href="https://t.me/fibuddy_bot" class="plan-trial-link" onclick="gtag('event','cta_click',{'location':'pricing_lite_trial'})">Trial 7 hari gratis</a>
           <hr class="plan-divider" />
           <ul class="plan-features">
@@ -552,8 +552,8 @@
         <!-- Pro -->
         <div class="plan">
           <div class="plan-name">Pro</div>
-          <div class="plan-price">Rp 119.000<span class="plan-price-unit">/thn</span></div>
-          <div class="plan-effective">efektif Rp 9.917/bln</div>
+          <div class="plan-price" id="pro-price-display">Rp 119.000<span class="plan-price-unit">/thn</span></div>
+          <div class="plan-effective" id="pro-effective-display">efektif Rp 9.917/bln</div>
           <a id="pricing-pro-trial" href="https://t.me/fibuddy_bot" class="plan-trial-link" onclick="gtag('event','cta_click',{'location':'pricing_pro_trial'})">Trial 7 hari gratis</a>
           <hr class="plan-divider" />
           <ul class="plan-features">
@@ -763,8 +763,13 @@
   // ── Pricing / Platform ───────────────────────────────
 
   var PLAN_AMOUNTS = {
-    lite: 49000,
-    pro:  119000
+    telegram: { lite: 49000,  pro: 119000 },
+    whatsapp:  { lite: 99000,  pro: 169000 }
+  };
+
+  var PLAN_EFFECTIVE = {
+    telegram: { lite: '4.083', pro: '9.917'  },
+    whatsapp:  { lite: '8.250', pro: '14.083' }
   };
 
   var currentPlatform = 'telegram';
@@ -782,6 +787,10 @@
     }
   };
 
+  function formatRp(n) {
+    return 'Rp ' + n.toLocaleString('id-ID');
+  }
+
   function setPlatform(platform) {
     currentPlatform = platform;
     var isTg = platform === 'telegram';
@@ -790,14 +799,25 @@
     document.getElementById('btn-platform-telegram').classList.toggle('active', isTg);
     document.getElementById('btn-platform-whatsapp').classList.toggle('active', !isTg);
 
+    // Update prices
+    var amounts  = PLAN_AMOUNTS[platform];
+    var effectives = PLAN_EFFECTIVE[platform];
+
+    document.getElementById('lite-price-display').innerHTML =
+      formatRp(amounts.lite) + '<span class="plan-price-unit">/thn</span>';
+    document.getElementById('lite-effective-display').textContent =
+      'efektif Rp ' + effectives.lite + '/bln';
+
+    document.getElementById('pro-price-display').innerHTML =
+      formatRp(amounts.pro) + '<span class="plan-price-unit">/thn</span>';
+    document.getElementById('pro-effective-display').textContent =
+      'efektif Rp ' + effectives.pro + '/bln';
+
+    // Update links
     var links = PLATFORM_LINKS[platform];
-
-    // Update Free CTA
-    document.getElementById('pricing-free-cta').href = links.free;
-
-    // Update trial links
+    document.getElementById('pricing-free-cta').href  = links.free;
     document.getElementById('pricing-lite-trial').href = links.trial;
-    document.getElementById('pricing-pro-trial').href = links.trial;
+    document.getElementById('pricing-pro-trial').href  = links.trial;
   }
 
   function handlePricingCta(plan) {
@@ -810,10 +830,6 @@
     }
   }
 
-  function formatRp(n) {
-    return 'Rp ' + n.toLocaleString('id-ID');
-  }
-
   // ── Checkout Modal ────────────────────────────────────
 
   var modalPlan = null;
@@ -821,7 +837,7 @@
   var isProcessing = false;
 
   function updateModalPrice() {
-    var amount = PLAN_AMOUNTS[modalPlan];
+    var amount = PLAN_AMOUNTS[currentPlatform][modalPlan];
     var label = 'Paket ' + (modalPlan === 'lite' ? 'Lite' : 'Pro');
     document.getElementById('modal-plan-label').textContent = label;
     document.getElementById('modal-plan-price').textContent = formatRp(amount) + ' / tahun';
