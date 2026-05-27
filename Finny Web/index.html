@@ -266,6 +266,74 @@
   .footer-links{display:flex;gap:1.5rem;}
   .footer-links a{color:rgba(255,255,255,.35);transition:color .2s;}
   .footer-links a:hover{color:rgba(255,255,255,.75);}
+
+  /* ── Features v2 (dark section) ── */
+  .features-dark-section{background:#111827;}
+  .features-dark-section .eyebrow{background:rgba(34,170,124,.15);border-color:rgba(34,170,124,.3);color:#4ade80;}
+  .features-dark-section .section-title{color:#f9fafb;}
+  .features-dark-section .section-sub{color:#9ca3af;}
+  .features-dark-section .grad-text{color:#4ade80;}
+  .feature-card-v2{background:#1f2937;border:1px solid rgba(255,255,255,.06);padding:1.75rem;border-radius:1rem;display:flex;flex-direction:column;transition:all .25s;}
+  .feature-card-v2:hover{border-color:rgba(255,255,255,.18);transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,0,0,.4);}
+  .feature-icon-v2{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem;flex-shrink:0;}
+  .feature-icon-v2 svg{width:22px;height:22px;}
+  .feature-title-v2{font-weight:700;font-size:1rem;color:#f9fafb;margin-bottom:.875rem;line-height:1.3;}
+  .feature-pain-block{background:rgba(0,0,0,.3);border-radius:8px;padding:.75rem;margin-bottom:.875rem;}
+  .feature-pain-label{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#6b7280;margin-bottom:.3rem;}
+  .feature-pain-text{font-size:.875rem;color:#d1d5db;font-style:italic;line-height:1.5;}
+  .feature-desc-v2{font-size:.875rem;color:#9ca3af;line-height:1.7;margin-bottom:1.25rem;flex:1;}
+  .feature-badge-pill{display:inline-flex;font-size:11px;font-weight:600;padding:4px 12px;border-radius:9999px;border:1px solid;align-self:flex-start;}
+  .feature-badge-pill.all-tier{background:rgba(34,170,124,.15);border-color:rgba(34,170,124,.3);color:#4ade80;}
+  .feature-badge-pill.lite-pro{background:rgba(139,92,246,.15);border-color:rgba(139,92,246,.3);color:#a78bfa;}
+  .feature-badge-pill.budget-badge{background:rgba(249,115,22,.15);border-color:rgba(249,115,22,.3);color:#fb923c;}
+  .feature-badge-pill.goals-badge{background:rgba(20,184,166,.15);border-color:rgba(20,184,166,.3);color:#2dd4bf;}
+
+  /* ── Pricing v2 (dark section) ── */
+  .pricing-dark-section{background:#111827;}
+  .pricing-dark-section .pricing-bg{background:transparent;}
+  .pricing-dark-section .eyebrow{background:rgba(34,170,124,.15);border-color:rgba(34,170,124,.3);color:#4ade80;}
+  .pricing-dark-section .section-title{color:#f9fafb;}
+  .pricing-dark-section .section-sub{color:#9ca3af;}
+  .pricing-dark-section .grad-text{color:#4ade80;}
+  .platform-btns{display:flex;gap:.75rem;justify-content:center;margin-top:2rem;margin-bottom:1rem;flex-wrap:wrap;}
+  .platform-btn{display:inline-flex;align-items:center;gap:.5rem;padding:9px 20px;border-radius:9999px;border:1.5px solid rgba(255,255,255,.18);background:rgba(255,255,255,.05);color:rgba(255,255,255,.85);font-size:14px;font-weight:600;cursor:pointer;transition:all .2s;text-decoration:none;}
+  .platform-btn:hover{border-color:rgba(255,255,255,.4);background:rgba(255,255,255,.12);color:#fff;}
+  .platform-btn svg{width:18px;height:18px;flex-shrink:0;}
+  .pricing-dark-section .plan{background:#1f2937;border-color:rgba(255,255,255,.08);}
+  .pricing-dark-section .plan:hover{border-color:rgba(255,255,255,.22);}
+  .pricing-dark-section .plan.featured{background:#1f2937;background-image:none;border:2px solid #6366f1;box-shadow:0 0 0 1px rgba(99,102,241,.25),var(--shadow-lg);}
+  .pricing-dark-section .plan.featured:hover{filter:none;border-color:#818cf8;}
+  @media(min-width:768px){.pricing-dark-section .plan.featured{transform:scale(1.03);}.pricing-dark-section .plan.featured:hover{transform:scale(1.03) translateY(-4px);}}
+  .pricing-dark-section .plan-tag{background:#f9fafb;color:#111827;text-transform:none;letter-spacing:.01em;font-size:11px;padding:4px 16px;}
+  .pricing-dark-section .plan-name{color:#9ca3af;}
+  .pricing-dark-section .plan.featured .plan-name{color:#a5b4fc;}
+  .pricing-dark-section .plan-price{color:#f9fafb;}
+  .pricing-dark-section .plan.featured .plan-price{color:#f9fafb;}
+  .pricing-dark-section .plan-period{color:#9ca3af;}
+  .pricing-dark-section .plan.featured .plan-period{color:#9ca3af;}
+  .pricing-dark-section .plan-divider{border-color:rgba(255,255,255,.08);}
+  .pricing-dark-section .plan.featured .plan-divider{border-color:rgba(255,255,255,.12);}
+  .pricing-dark-section .plan-features li{color:#d1d5db;}
+  .pricing-dark-section .plan.featured .plan-features li{color:#d1d5db;}
+  .pricing-dark-section .plan-features li::before{color:#4ade80;}
+  .pricing-dark-section .plan.featured .plan-features li::before{color:#4ade80;}
+  .pricing-dark-section .plan-features li.muted{color:#4b5563;}
+  .pricing-dark-section .plan.featured .plan-features li.muted{color:#4b5563;}
+  .pricing-dark-section .plan-features li.muted::before{content:'—';color:#4b5563;}
+  .pricing-dark-section .plan.featured .plan-features li.muted::before{content:'—';color:#4b5563;}
+  .pricing-dark-section .plan-cta{border-color:rgba(255,255,255,.22);color:#f9fafb;}
+  .pricing-dark-section .plan-cta:hover{background:rgba(255,255,255,.1);color:#fff;}
+  .pricing-dark-section .plan.featured .plan-cta{background:#f9fafb;color:#111827;border-color:#f9fafb;}
+  .pricing-dark-section .plan.featured .plan-cta:hover{background:#e5e7eb;border-color:#e5e7eb;color:#111827;}
+  .plan-price-unit{font-family:var(--font-sans);font-size:1rem;font-weight:500;letter-spacing:0;}
+  .plan-effective{font-size:.78rem;color:var(--muted-foreground);margin-top:.25rem;}
+  .pricing-dark-section .plan-effective{color:#9ca3af;}
+  .pricing-dark-section .plan.featured .plan-effective{color:#9ca3af;}
+  .plan-trial-link{font-size:.82rem;color:#818cf8;display:inline-block;margin-top:.375rem;text-decoration:none;}
+  .plan-trial-link:hover{color:#a5b4fc;text-decoration:underline;}
+  .pricing-footer-note{text-align:center;margin-top:1.5rem;font-size:.78rem;color:#6b7280;}
+  .pricing-dark-section .payment-label{color:#6b7280;}
+  .pricing-dark-section .payment-badge{background:#1f2937;border-color:rgba(255,255,255,.1);color:#9ca3af;}
 </style>
 </head>
 <body>
@@ -317,7 +385,7 @@
   </section>
 
   <!-- FEATURES -->
-  <section id="fitur" class="block">
+  <section id="fitur" class="block features-dark-section">
     <div class="container">
       <div class="center max-2">
         <span class="eyebrow">Fitur Utama</span>
@@ -325,18 +393,97 @@
         <p class="section-sub">Fitur lengkap untuk mencatat, menganalisis, dan mengontrol keuanganmu sehari-hari.</p>
       </div>
       <div class="features-grid">
-        <div class="feature-card"><div class="feature-icon">✍️</div><h3 class="feature-title">Tulis transaksi</h3><p class="feature-desc">Cukup ketik transaksi dan nominalnya, Finny langsung simpan secara otomatis.</p></div>
-        <div class="feature-card"><div class="badges"><span class="badge lite">Lite</span><span class="badge pro">Pro</span></div><div class="feature-icon">📸</div><h3 class="feature-title">Foto struk</h3><p class="feature-desc">Foto saja struk belanjaanmu, Finny baca nominalnya secara instan.</p></div>
-        <div class="feature-card"><div class="badges"><span class="badge lite">Lite</span><span class="badge pro">Pro</span></div><div class="feature-icon">🎙️</div><h3 class="feature-title">Rekam suara</h3><p class="feature-desc">Lagi nyetir? Rekam suaramu, Finny yang akan mencatat transaksinya.</p></div>
-        <div class="feature-card"><div class="feature-icon">🧾</div><h3 class="feature-title">Split bill</h3><p class="feature-desc">Hitung dan bagi tagihan bareng teman langsung dari chat, tanpa ribet.</p></div>
-        <div class="feature-card"><div class="feature-icon">📊</div><h3 class="feature-title">Laporan otomatis</h3><p class="feature-desc">Cek ringkasan keuangan per kategori, harian, bulanan — kapan pun kamu mau.</p></div>
-        <div class="feature-card"><div class="feature-icon">🎯</div><h3 class="feature-title">Budgeting</h3><p class="feature-desc">Set limit per kategori dan dapat notifikasi kalau hampir kelewat batas.</p></div>
+
+        <!-- Ketik langsung tercatat -->
+        <div class="feature-card-v2">
+          <div class="feature-icon-v2" style="background:rgba(34,197,94,.15);color:#4ade80">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+          </div>
+          <h3 class="feature-title-v2">Ketik langsung tercatat</h3>
+          <div class="feature-pain-block">
+            <div class="feature-pain-label">Pain</div>
+            <p class="feature-pain-text">"Ngetik kayak chat biasa — Finny yang urus sisanya."</p>
+          </div>
+          <p class="feature-desc-v2">"Grab 25rb" atau "Makan siang 85rb GoPay" — langsung tercatat. Tidak ada form, tidak ada pilih-pilih.</p>
+          <span class="feature-badge-pill all-tier">Semua tier</span>
+        </div>
+
+        <!-- Rekam suara atau foto struk -->
+        <div class="feature-card-v2">
+          <div class="feature-icon-v2" style="background:rgba(139,92,246,.15);color:#a78bfa">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"/><path d="M19 10v2a7 7 0 01-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+          </div>
+          <h3 class="feature-title-v2">Rekam suara atau foto struk</h3>
+          <div class="feature-pain-block">
+            <div class="feature-pain-label">Pain</div>
+            <p class="feature-pain-text">"Ga sempet ngetik? Rekam atau foto aja."</p>
+          </div>
+          <p class="feature-desc-v2">Kirim voice note atau foto struk — Finny baca dan catat otomatis. Ga perlu ngetik satu karakter pun.</p>
+          <span class="feature-badge-pill lite-pro">Lite &amp; Pro</span>
+        </div>
+
+        <!-- Rekap harian & bulanan otomatis -->
+        <div class="feature-card-v2">
+          <div class="feature-icon-v2" style="background:rgba(59,130,246,.15);color:#60a5fa">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          </div>
+          <h3 class="feature-title-v2">Rekap harian &amp; bulanan otomatis</h3>
+          <div class="feature-pain-block">
+            <div class="feature-pain-label">Pain</div>
+            <p class="feature-pain-text">"Jangan kaget sama pengeluaranmu sendiri."</p>
+          </div>
+          <p class="feature-desc-v2">Laporan otomatis tiap malam dan tiap akhir bulan. Selalu tau kondisi keuanganmu sebelum terlambat sadar.</p>
+          <span class="feature-badge-pill all-tier">Semua tier</span>
+        </div>
+
+        <!-- Budget yang benar-benar bekerja -->
+        <div class="feature-card-v2">
+          <div class="feature-icon-v2" style="background:rgba(249,115,22,.15);color:#fb923c">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
+          </div>
+          <h3 class="feature-title-v2">Budget yang benar-benar bekerja</h3>
+          <div class="feature-pain-block">
+            <div class="feature-pain-label">Pain</div>
+            <p class="feature-pain-text">"Uang habis duluan baru sadar? Seharusnya bisa dicegah."</p>
+          </div>
+          <p class="feature-desc-v2">Set batas pengeluaran per kategori. Finny ingatkan sebelum limit terlampaui — bukan sesudah jebol.</p>
+          <span class="feature-badge-pill budget-badge">2 kat (Free) · Unlimited (Lite+)</span>
+        </div>
+
+        <!-- Tabungan & Goals -->
+        <div class="feature-card-v2">
+          <div class="feature-icon-v2" style="background:rgba(20,184,166,.15);color:#2dd4bf">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+          </div>
+          <h3 class="feature-title-v2">Tabungan &amp; Goals</h3>
+          <div class="feature-pain-block">
+            <div class="feature-pain-label">Pain</div>
+            <p class="feature-pain-text">"Susah nabung? Mungkin karena belum ada tujuannya."</p>
+          </div>
+          <p class="feature-desc-v2">Set goal — liburan, DP, dana darurat. Finny pantau progress tiap rupiah sampai target tercapai.</p>
+          <span class="feature-badge-pill goals-badge">1 (Free) · 3 (Lite) · ∞ (Pro)</span>
+        </div>
+
+        <!-- Sesuai ritme keuanganmu -->
+        <div class="feature-card-v2">
+          <div class="feature-icon-v2" style="background:rgba(239,68,68,.15);color:#f87171">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <h3 class="feature-title-v2">Sesuai ritme keuanganmu</h3>
+          <div class="feature-pain-block">
+            <div class="feature-pain-label">Pain</div>
+            <p class="feature-pain-text">"Keuanganmu punya ritme sendiri. Finny ikutin."</p>
+          </div>
+          <p class="feature-desc-v2">Gajian, terima klien, atau income tidak menentu — atur sendiri kapan periode keuanganmu dimulai.</p>
+          <span class="feature-badge-pill lite-pro">Lite &amp; Pro</span>
+        </div>
+
       </div>
     </div>
   </section>
 
   <!-- PRICING -->
-  <section id="harga" class="block pricing">
+  <section id="harga" class="block pricing pricing-dark-section">
     <div class="pricing-bg"></div>
     <div class="pricing-mesh"></div>
     <div class="container">
@@ -345,73 +492,84 @@
         <h2 class="section-title">Pilih paket yang <em class="grad-text">pas buat kamu</em></h2>
         <p class="section-sub">Mulai gratis, upgrade kapan saja. Tanpa kontrak jangka panjang.</p>
       </div>
-      <!-- Billing toggle -->
-      <div class="billing-toggle">
-        <div class="billing-toggle-track">
-          <button class="billing-btn active" id="btn-monthly" onclick="setBilling('monthly')" type="button">Bulanan</button>
-          <button class="billing-btn" id="btn-yearly" onclick="setBilling('yearly')" type="button">Tahunan</button>
-        </div>
-        <span class="billing-save" id="billing-save-badge">Hemat 2 bulan</span>
+
+      <!-- Platform buttons -->
+      <div class="platform-btns">
+        <a href="https://t.me/fibuddy_bot" class="platform-btn" onclick="gtag('event','platform_click',{'platform':'telegram'})">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 000 12a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0012 0a12 12 0 00-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 01.171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+          Telegram
+        </a>
+        <a href="https://wa.me/628155193468" class="platform-btn" onclick="gtag('event','platform_click',{'platform':'whatsapp'})">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp
+        </a>
       </div>
 
       <div class="pricing-grid">
         <!-- Free -->
         <div class="plan">
-          <div class="plan-name">Gratis</div>
-          <div class="plan-price">Rp 0</div>
+          <div class="plan-name">Free</div>
+          <div class="plan-price">Gratis</div>
           <div class="plan-period">selamanya</div>
-          <div class="plan-yearly" style="visibility:hidden">.</div>
-          <hr class="plan-divider" />
+          <hr class="plan-divider" style="margin-top:1.5rem" />
           <ul class="plan-features">
-            <li>Catat transaksi via chat</li>
-            <li>Laporan harian &amp; bulanan</li>
-            <li>Split bill</li>
-            <li>1 kategori budget</li>
-            <li>Histori 3 bulan terakhir</li>
-            <li>Foto struk</li>
-            <li>Rekam suara</li>
+            <li>Input teks (30 transaksi/hari)</li>
+            <li>Laporan harian &amp; bulanan (teks)</li>
+            <li>2 budget kategori</li>
+            <li>1 goal aktif</li>
+            <li>Histori 3 bulan</li>
+            <li>Split bill (2–5 orang)</li>
+            <li class="muted">Voice note &amp; scan struk</li>
+            <li class="muted">Laporan visual &amp; Excel</li>
+            <li class="muted">Auto-report terjadwal</li>
           </ul>
-          <p style="font-size:.72rem;color:var(--muted-foreground);margin:.75rem 0 1.25rem;line-height:1.4">Kombinasi foto struk &amp; rekam suara: maks. 30x/bulan</p>
-          <a href="https://t.me/fibuddy_bot" onclick="gtag('event','cta_click',{'location':'pricing_free'})" class="plan-cta">Mulai Sekarang</a>
+          <a href="https://t.me/fibuddy_bot" onclick="gtag('event','cta_click',{'location':'pricing_free'})" class="plan-cta">Mulai gratis</a>
         </div>
 
         <!-- Lite (featured) -->
         <div class="plan featured">
-          <span class="plan-tag">Populer</span>
+          <span class="plan-tag">Paling populer</span>
           <div class="plan-name">Lite</div>
-          <div class="plan-price" id="lite-price">Hanya Rp 4.900</div>
-          <div class="plan-period" id="lite-period">per bulan</div>
-          <div class="plan-yearly" id="lite-note">atau Rp 49.000 / tahun</div>
+          <div class="plan-price">Rp 49.000<span class="plan-price-unit">/thn</span></div>
+          <div class="plan-effective">efektif Rp 4.083/bln</div>
+          <a href="https://t.me/fibuddy_bot" class="plan-trial-link" onclick="gtag('event','cta_click',{'location':'pricing_lite_trial'})">Trial 7 hari gratis</a>
           <hr class="plan-divider" />
           <ul class="plan-features">
-            <li>Catat transaksi via chat</li>
-            <li>Laporan harian &amp; bulanan</li>
-            <li>Split bill</li>
-            <li>Budget unlimited</li>
-            <li>Histori 12 bulan terakhir</li>
-            <li>Foto struk: maks. 10x / hari</li>
-            <li>Rekam suara: maks. 10x / hari</li>
+            <li>Input teks unlimited</li>
+            <li>Laporan visual + grafik + Excel</li>
+            <li>Budget &amp; goals unlimited</li>
+            <li>Histori 6 bulan</li>
+            <li>Voice note &amp; scan (20x/bln)</li>
+            <li>Auto-report harian, mingguan, bulanan</li>
+            <li>Custom periode keuangan</li>
+            <li>Couple tracking</li>
+            <li>Split bill advanced (6+ orang)</li>
           </ul>
-          <button type="button" onclick="openCheckout('lite');gtag('event','cta_click',{'location':'pricing_lite'})" class="plan-cta">Pilih Lite</button>
+          <button type="button" onclick="openCheckout('lite');gtag('event','cta_click',{'location':'pricing_lite'})" class="plan-cta">Coba 7 hari gratis</button>
         </div>
 
         <!-- Pro -->
         <div class="plan">
           <div class="plan-name">Pro</div>
-          <div class="plan-price" id="pro-price">Rp 14.900</div>
-          <div class="plan-period" id="pro-period">per bulan</div>
-          <div class="plan-yearly" id="pro-note">atau Rp 149.000 / tahun</div>
+          <div class="plan-price">Rp 119.000<span class="plan-price-unit">/thn</span></div>
+          <div class="plan-effective">efektif Rp 9.917/bln</div>
+          <a href="https://t.me/fibuddy_bot" class="plan-trial-link" onclick="gtag('event','cta_click',{'location':'pricing_pro_trial'})">Trial 7 hari gratis</a>
           <hr class="plan-divider" />
           <ul class="plan-features">
             <li>Semua fitur Lite</li>
-            <li>Analisis keuangan mendalam</li>
-            <li>Export laporan (PDF/Excel)</li>
-            <li>Histori transaksi selamanya</li>
-            <li>Priority support</li>
+            <li>Voice note &amp; scan unlimited</li>
+            <li>Histori 12 bulan</li>
+            <li>Goals unlimited</li>
+            <li>Hutang/piutang tracker</li>
+            <li>AI summary bulanan</li>
+            <li>Priority support (24 jam)</li>
           </ul>
-          <button type="button" onclick="openCheckout('pro');gtag('event','cta_click',{'location':'pricing_pro'})" class="plan-cta">Pilih Pro</button>
+          <button type="button" onclick="openCheckout('pro');gtag('event','cta_click',{'location':'pricing_pro'})" class="plan-cta">Coba 7 hari gratis</button>
         </div>
       </div>
+
+      <!-- Pricing footer note -->
+      <p class="pricing-footer-note">Harga per tahun · Bayar sekali, pakai setahun penuh · Trial 7 hari gratis untuk Lite &amp; Pro</p>
 
       <!-- Payment methods -->
       <div class="payment-methods">
@@ -467,11 +625,6 @@
     <div class="modal-plan-info" id="modal-plan-info">
       <div class="modal-plan-name" id="modal-plan-label">Paket Lite</div>
       <div class="modal-plan-price" id="modal-plan-price">Rp 4.900</div>
-    </div>
-
-    <div class="modal-period-toggle">
-      <button type="button" class="period-btn active" id="period-monthly" onclick="setModalPeriod('monthly')">Bulanan</button>
-      <button type="button" class="period-btn" id="period-yearly" onclick="setModalPeriod('yearly')">Tahunan <small style="font-weight:400;font-size:.75em">(hemat 2 bln)</small></button>
     </div>
 
     <div class="modal-field">
@@ -609,54 +762,31 @@
   // ── Pricing ──────────────────────────────────────────
 
   var PLAN_AMOUNTS = {
-    lite: { monthly: 4900, yearly: 49000 },
-    pro:  { monthly: 14900, yearly: 149000 }
+    lite: 49000,
+    pro:  119000
   };
-
-  var currentBilling = 'monthly';
 
   function formatRp(n) {
     return 'Rp ' + n.toLocaleString('id-ID');
   }
 
-  function setBilling(mode) {
-    currentBilling = mode;
-    var isYearly = mode === 'yearly';
-    document.getElementById('btn-monthly').classList.toggle('active', !isYearly);
-    document.getElementById('btn-yearly').classList.toggle('active', isYearly);
-    document.getElementById('billing-save-badge').style.display = isYearly ? '' : 'none';
-
-    document.getElementById('lite-price').textContent = 'Hanya ' + formatRp(PLAN_AMOUNTS.lite[mode]);
-    document.getElementById('lite-period').textContent = isYearly ? 'per tahun' : 'per bulan';
-    document.getElementById('lite-note').textContent = isYearly ? 'setara Rp 4.083 / bulan' : 'atau Rp 49.000 / tahun';
-
-    document.getElementById('pro-price').textContent = formatRp(PLAN_AMOUNTS.pro[mode]);
-    document.getElementById('pro-period').textContent = isYearly ? 'per tahun' : 'per bulan';
-    document.getElementById('pro-note').textContent = isYearly ? 'setara Rp 12.416 / bulan' : 'atau Rp 149.000 / tahun';
-
-    if (modalPlan) updateModalPrice();
-  }
-
   // ── Checkout Modal ────────────────────────────────────
 
   var modalPlan = null;
-  var modalPeriod = 'monthly';
+  var modalPeriod = 'yearly';
   var isProcessing = false;
 
   function updateModalPrice() {
-    var amount = PLAN_AMOUNTS[modalPlan][modalPeriod];
+    var amount = PLAN_AMOUNTS[modalPlan];
     var label = 'Paket ' + (modalPlan === 'lite' ? 'Lite' : 'Pro');
-    var periodLabel = modalPeriod === 'monthly' ? '/ bulan' : '/ tahun';
     document.getElementById('modal-plan-label').textContent = label;
-    document.getElementById('modal-plan-price').textContent = formatRp(amount) + ' ' + periodLabel;
+    document.getElementById('modal-plan-price').textContent = formatRp(amount) + ' / tahun';
   }
 
   function openCheckout(plan) {
     modalPlan = plan;
-    modalPeriod = currentBilling;
+    modalPeriod = 'yearly';
     document.getElementById('modal-title').textContent = 'Checkout Paket ' + (plan === 'lite' ? 'Lite' : 'Pro');
-    document.getElementById('period-monthly').classList.toggle('active', modalPeriod === 'monthly');
-    document.getElementById('period-yearly').classList.toggle('active', modalPeriod === 'yearly');
     updateModalPrice();
     document.getElementById('checkout-email').value = '';
     document.getElementById('email-error').style.display = 'none';
@@ -673,13 +803,6 @@
 
   function handleOverlayClick(e) {
     if (e.target === document.getElementById('checkout-modal')) closeCheckout();
-  }
-
-  function setModalPeriod(p) {
-    modalPeriod = p;
-    document.getElementById('period-monthly').classList.toggle('active', p === 'monthly');
-    document.getElementById('period-yearly').classList.toggle('active', p === 'yearly');
-    updateModalPrice();
   }
 
   async function initiatePayment() {
