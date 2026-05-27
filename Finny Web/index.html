@@ -106,7 +106,7 @@
   .hero-glow-outer{display:none;}
   .hero-glow-inner{display:none;}
   .hero-img{position:relative;width:100%;border-radius:20px 20px 0 0;object-fit:cover;box-shadow:var(--shadow-lg);}
-  @media(min-width:1024px){.hero-img{border-radius:20px 20px 0 0;max-height:560px;object-position:top;}}
+  @media(min-width:1024px){.hero-img{border-radius:20px 20px 0 0;}}
 
   /* Section base */
   section.block{padding:6rem 1.5rem;}
@@ -296,8 +296,9 @@
   .pricing-dark-section .section-sub{color:#9ca3af;}
   .pricing-dark-section .grad-text{color:#4ade80;}
   .platform-btns{display:flex;gap:.75rem;justify-content:center;margin-top:2rem;margin-bottom:1rem;flex-wrap:wrap;}
-  .platform-btn{display:inline-flex;align-items:center;gap:.5rem;padding:9px 20px;border-radius:9999px;border:1.5px solid rgba(255,255,255,.18);background:rgba(255,255,255,.05);color:rgba(255,255,255,.85);font-size:14px;font-weight:600;cursor:pointer;transition:all .2s;text-decoration:none;}
+  .platform-btn{display:inline-flex;align-items:center;gap:.5rem;padding:9px 20px;border-radius:9999px;border:1.5px solid rgba(255,255,255,.18);background:rgba(255,255,255,.05);color:rgba(255,255,255,.75);font-size:14px;font-weight:600;cursor:pointer;transition:all .2s;text-decoration:none;}
   .platform-btn:hover{border-color:rgba(255,255,255,.4);background:rgba(255,255,255,.12);color:#fff;}
+  .platform-btn.active{border-color:rgba(255,255,255,.55);background:rgba(255,255,255,.15);color:#fff;}
   .platform-btn svg{width:18px;height:18px;flex-shrink:0;}
   .pricing-dark-section .plan{background:#1f2937;border-color:rgba(255,255,255,.08);}
   .pricing-dark-section .plan:hover{border-color:rgba(255,255,255,.22);}
@@ -490,19 +491,19 @@
       <div class="center max-2">
         <span class="eyebrow">Harga</span>
         <h2 class="section-title">Pilih paket yang <em class="grad-text">pas buat kamu</em></h2>
-        <p class="section-sub">Mulai gratis, upgrade kapan saja. Tanpa kontrak jangka panjang.</p>
+        <p class="section-sub">Mulai gratis untuk atur keuanganmu dengan mudah dan terarah.</p>
       </div>
 
       <!-- Platform buttons -->
       <div class="platform-btns">
-        <a href="https://t.me/fibuddy_bot" class="platform-btn" onclick="gtag('event','platform_click',{'platform':'telegram'})">
+        <button type="button" id="btn-platform-telegram" class="platform-btn active" onclick="setPlatform('telegram');gtag('event','platform_click',{'platform':'telegram'})">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 000 12a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0012 0a12 12 0 00-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 01.171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
           Telegram
-        </a>
-        <a href="https://wa.me/628155193468" class="platform-btn" onclick="gtag('event','platform_click',{'platform':'whatsapp'})">
+        </button>
+        <button type="button" id="btn-platform-whatsapp" class="platform-btn" onclick="setPlatform('whatsapp');gtag('event','platform_click',{'platform':'whatsapp'})">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
           WhatsApp
-        </a>
+        </button>
       </div>
 
       <div class="pricing-grid">
@@ -523,7 +524,7 @@
             <li class="muted">Laporan visual &amp; Excel</li>
             <li class="muted">Auto-report terjadwal</li>
           </ul>
-          <a href="https://t.me/fibuddy_bot" onclick="gtag('event','cta_click',{'location':'pricing_free'})" class="plan-cta">Mulai gratis</a>
+          <a id="pricing-free-cta" href="https://t.me/fibuddy_bot" onclick="gtag('event','cta_click',{'location':'pricing_free'})" class="plan-cta">Mulai gratis</a>
         </div>
 
         <!-- Lite (featured) -->
@@ -532,7 +533,7 @@
           <div class="plan-name">Lite</div>
           <div class="plan-price">Rp 49.000<span class="plan-price-unit">/thn</span></div>
           <div class="plan-effective">efektif Rp 4.083/bln</div>
-          <a href="https://t.me/fibuddy_bot" class="plan-trial-link" onclick="gtag('event','cta_click',{'location':'pricing_lite_trial'})">Trial 7 hari gratis</a>
+          <a id="pricing-lite-trial" href="https://t.me/fibuddy_bot" class="plan-trial-link" onclick="gtag('event','cta_click',{'location':'pricing_lite_trial'})">Trial 7 hari gratis</a>
           <hr class="plan-divider" />
           <ul class="plan-features">
             <li>Input teks unlimited</li>
@@ -545,7 +546,7 @@
             <li>Couple tracking</li>
             <li>Split bill advanced (6+ orang)</li>
           </ul>
-          <button type="button" onclick="openCheckout('lite');gtag('event','cta_click',{'location':'pricing_lite'})" class="plan-cta">Coba 7 hari gratis</button>
+          <button type="button" id="pricing-lite-cta" onclick="handlePricingCta('lite');gtag('event','cta_click',{'location':'pricing_lite'})" class="plan-cta">Coba 7 hari gratis</button>
         </div>
 
         <!-- Pro -->
@@ -553,7 +554,7 @@
           <div class="plan-name">Pro</div>
           <div class="plan-price">Rp 119.000<span class="plan-price-unit">/thn</span></div>
           <div class="plan-effective">efektif Rp 9.917/bln</div>
-          <a href="https://t.me/fibuddy_bot" class="plan-trial-link" onclick="gtag('event','cta_click',{'location':'pricing_pro_trial'})">Trial 7 hari gratis</a>
+          <a id="pricing-pro-trial" href="https://t.me/fibuddy_bot" class="plan-trial-link" onclick="gtag('event','cta_click',{'location':'pricing_pro_trial'})">Trial 7 hari gratis</a>
           <hr class="plan-divider" />
           <ul class="plan-features">
             <li>Semua fitur Lite</li>
@@ -564,7 +565,7 @@
             <li>AI summary bulanan</li>
             <li>Priority support (24 jam)</li>
           </ul>
-          <button type="button" onclick="openCheckout('pro');gtag('event','cta_click',{'location':'pricing_pro'})" class="plan-cta">Coba 7 hari gratis</button>
+          <button type="button" id="pricing-pro-cta" onclick="handlePricingCta('pro');gtag('event','cta_click',{'location':'pricing_pro'})" class="plan-cta">Coba 7 hari gratis</button>
         </div>
       </div>
 
@@ -759,12 +760,55 @@
     }
   })();
 
-  // ── Pricing ──────────────────────────────────────────
+  // ── Pricing / Platform ───────────────────────────────
 
   var PLAN_AMOUNTS = {
     lite: 49000,
     pro:  119000
   };
+
+  var currentPlatform = 'telegram';
+
+  var WA_BASE = 'https://wa.me/628155193468';
+
+  var PLATFORM_LINKS = {
+    telegram: {
+      free:  'https://t.me/fibuddy_bot',
+      trial: 'https://t.me/fibuddy_bot'
+    },
+    whatsapp: {
+      free:  WA_BASE + '?text=' + encodeURIComponent('Halo Finny, saya mau mulai gratis lewat WhatsApp'),
+      trial: WA_BASE + '?text=' + encodeURIComponent('Halo Finny, saya mau coba 7 hari gratis')
+    }
+  };
+
+  function setPlatform(platform) {
+    currentPlatform = platform;
+    var isTg = platform === 'telegram';
+
+    // Toggle active button
+    document.getElementById('btn-platform-telegram').classList.toggle('active', isTg);
+    document.getElementById('btn-platform-whatsapp').classList.toggle('active', !isTg);
+
+    var links = PLATFORM_LINKS[platform];
+
+    // Update Free CTA
+    document.getElementById('pricing-free-cta').href = links.free;
+
+    // Update trial links
+    document.getElementById('pricing-lite-trial').href = links.trial;
+    document.getElementById('pricing-pro-trial').href = links.trial;
+  }
+
+  function handlePricingCta(plan) {
+    if (currentPlatform === 'whatsapp') {
+      var planName = plan === 'lite' ? 'Lite' : 'Pro';
+      var text = 'Halo Finny, saya mau berlangganan paket ' + planName + ' lewat WhatsApp';
+      window.open(WA_BASE + '?text=' + encodeURIComponent(text), '_blank');
+    } else {
+      openCheckout(plan);
+    }
+  }
 
   function formatRp(n) {
     return 'Rp ' + n.toLocaleString('id-ID');
